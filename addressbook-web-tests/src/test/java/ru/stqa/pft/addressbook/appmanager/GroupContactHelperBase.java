@@ -41,7 +41,7 @@ public class GroupContactHelperBase extends HelperBase {
   }
 
   public void submitContactCreation() {
-    clickContact();
+    clickContact(By.xpath("//div[@id='content']/form/input[21]"));
   }
 
   public void fillContactForm(ContactData contactData) {
@@ -57,7 +57,7 @@ public class GroupContactHelperBase extends HelperBase {
   }
 
   public void initContactCreation() {
-    clickGroup(By.linkText("add new"));
+    clickContact(By.linkText("add new"));
   }
 
   public void initGroupModification() {
@@ -66,5 +66,13 @@ public class GroupContactHelperBase extends HelperBase {
 
   public void submitGroupModification() {
     clickGroup(By.name("update"));
+  }
+
+  public void initContactModification() {
+    clickContact(By.xpath("//table[@id='maintable']/tbody/tr[20]/td[8]/a/img"));
+  }
+
+  public void submitContactModification() {
+    clickContact(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 }

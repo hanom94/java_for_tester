@@ -22,8 +22,8 @@ public class HelperBase {
     typeContact(locator, text);
   }
 
-  protected void clickContact() {
-    clickGroup(By.xpath("//div[@id='content']/form/input[21]"));
+  protected void clickContact(By locator) {
+    wd.findElement(locator).click();
   }
 
   protected void typeContact(By locator, String text) {
