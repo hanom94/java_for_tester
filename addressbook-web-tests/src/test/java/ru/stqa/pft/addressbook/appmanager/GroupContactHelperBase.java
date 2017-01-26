@@ -59,4 +59,12 @@ public class GroupContactHelperBase extends HelperBase {
   public void initContactCreation() {
     clickGroup(By.linkText("add new"));
   }
+
+  public void initGroupModification() {
+    clickGroup(By.name("edit"));
+  }
+
+  public void submitGroupModification() {
+    clickGroup(By.name("update"));
+  }
 }
