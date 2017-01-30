@@ -69,7 +69,7 @@ public class GroupContactHelperBase extends HelperBase {
   }
 
   public void initContactModification() {
-    clickContact(By.xpath("//table[@id='maintable']/tbody/tr[20]/td[8]/a/img"));
+    clickContact(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 
   public void submitContactModification() {
@@ -77,7 +77,7 @@ public class GroupContactHelperBase extends HelperBase {
   }
 
   public void selectContact() {
-    clickContact(By.id("10"));
+    clickContact(By.name("selected[]"));
   }
 
   public void deleteSelectedContacts() {
