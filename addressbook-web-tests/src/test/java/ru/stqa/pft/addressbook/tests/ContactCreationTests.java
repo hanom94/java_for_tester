@@ -9,9 +9,9 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() {
     app.getGroupContactHelperBase().initContactCreation();
     app.getGroupContactHelperBase().fillContactForm(new ContactData("Виктор", "Викторович",
-            "ViktorXX", "Киев", "+380988888888",
-            "+380999999999", "viktorxx@mail.ua",
-            "Киев, Улица 1 ", "+380933333333"));
+            null, null, null,
+            null, null,
+            null, null));
     app.getGroupContactHelperBase().submitContactCreation();
   }
 

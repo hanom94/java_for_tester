@@ -46,15 +46,15 @@ public class GroupContactHelperBase extends HelperBase {
   }
 
   public void fillContactForm(ContactData contactData) {
-    typeContact(By.name("firstname"), contactData.getFirstname());
-    typeContact(By.name("lastname"), contactData.getLastname());
-    typeContact(By.name("nickname"), contactData.getNickname());
-    typeContact(By.name("address"), contactData.getAddress());
-    typeContact(By.name("home"), contactData.getHomeTelephone());
-    typeContact(By.name("mobile"), contactData.getMobileTelephone());
-    typeContact(By.name("email"), contactData.getEmail());
-    typeContact(By.name("address2"), contactData.getAddress2());
-    typeContact(By.name("phone2"), contactData.getPhone2());
+    type(By.name("firstname"), contactData.getFirstname());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("nickname"), contactData.getNickname());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("home"), contactData.getHomeTelephone());
+    type(By.name("mobile"), contactData.getMobileTelephone());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("address2"), contactData.getAddress2());
+    type(By.name("phone2"), contactData.getPhone2());
   }
 
   public void initContactCreation() {
