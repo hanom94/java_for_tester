@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
     app.getGroupContactHelperBase().fillContactForm(new ContactData("Виктор", "Викторович",
             "ViktorXX", "Киев", "+380988888888",
             "+380999999999", "viktorxx@mail.ua",
-            "Киев, Улица 1 ", "+380933333333"));
+            "Киев, Улица 1 ", "+380933333333", null), false);
     app.getGroupContactHelperBase().submitContactModification();
 
   }

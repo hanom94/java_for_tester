@@ -11,7 +11,7 @@ public class ContactCreationTests extends TestBase {
     app.getGroupContactHelperBase().fillContactForm(new ContactData("Виктор", "Викторович",
             null, null, null,
             null, null,
-            null, null));
+            null, null, "test1"), true);
     app.getGroupContactHelperBase().submitContactCreation();
   }
 
