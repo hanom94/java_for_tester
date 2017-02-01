@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 /**
  * Created by hanom on 26.01.2017.
@@ -10,6 +11,17 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification (){
+    app.getNavigationHelper().gotoGroupPage();
+    if (! app.getGroupContactHelperBase().isThereAGroup()){
+      app.getGroupContactHelperBase().createGroup(new GroupData("test1", null, null));
+    }
+    app.getNavigationHelper().gotoHomePage();
+    if (! app.getGroupContactHelperBase().isThereAContact()){
+      app.getGroupContactHelperBase().createContact(new ContactData("Виктор", "Викторович",
+              null, null, null,
+              null, null,
+              null, null, "test1"));
+    }
     app.getNavigationHelper().gotoHomePage();
     app.getGroupContactHelperBase().initContactModification();
     app.getGroupContactHelperBase().fillContactForm(new ContactData("Виктор", "Викторович",
