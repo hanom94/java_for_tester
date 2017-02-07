@@ -25,7 +25,7 @@ public class ContactModificationTests extends TestBase {
     }
     int before = app.getGroupContactHelperBase().getContactCount();
     app.getNavigationHelper().gotoHomePage();
-    app.getGroupContactHelperBase().initContactModification();
+    app.getGroupContactHelperBase().initContactModification(before - 1);
     app.getGroupContactHelperBase().fillContactForm(new ContactData("Виктор", "Викторович",
             "ViktorXX", "Киев", "+380988888888",
             "+380999999999", "viktorxx@mail.ua",

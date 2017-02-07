@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -78,8 +79,12 @@ public class GroupContactHelperBase extends HelperBase {
     clickGroup(By.name("update"));
   }
 
-  public void initContactModification() {
-    clickContact(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void initContactModification(int index) {
+    WebElement wd1 = wd.findElement(By.id("maintable"));
+    WebElement wd2 = wd1.findElements(By.name("entry")).get(index);
+    WebElement wd3 = (WebElement) wd2.findElements(By.tagName("td")).get(7);
+    WebElement wd4 = (WebElement) wd3.findElement(By.tagName("a"));
+    wd4.click();
   }
 
   public void submitContactModification() {
