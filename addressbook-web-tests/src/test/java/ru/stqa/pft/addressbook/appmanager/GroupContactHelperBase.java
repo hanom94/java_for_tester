@@ -40,8 +40,8 @@ public class GroupContactHelperBase extends HelperBase {
     clickGroup(By.name("delete"));
   }
 
-  public void selectGroup() {
-    clickGroup(By.name("selected[]"));
+  public void selectGroup(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void submitContactCreation() {
@@ -86,8 +86,8 @@ public class GroupContactHelperBase extends HelperBase {
     clickContact(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
-  public void selectContact() {
-    clickContact(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void deleteSelectedContacts() {
@@ -114,5 +114,13 @@ public class GroupContactHelperBase extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getGroupCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }
