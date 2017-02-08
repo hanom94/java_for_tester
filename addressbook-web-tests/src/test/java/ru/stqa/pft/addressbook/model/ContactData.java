@@ -65,4 +65,55 @@ public class ContactData {
   public String getGroup() {
     return group;
   }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", address='" + address + '\'' +
+            ", homeTelephone='" + homeTelephone + '\'' +
+            ", mobileTelephone='" + mobileTelephone + '\'' +
+            ", email='" + email + '\'' +
+            ", address2='" + address2 + '\'' +
+            ", phone2='" + phone2 + '\'' +
+            ", group='" + group + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (homeTelephone != null ? !homeTelephone.equals(that.homeTelephone) : that.homeTelephone != null) return false;
+    if (mobileTelephone != null ? !mobileTelephone.equals(that.mobileTelephone) : that.mobileTelephone != null)
+      return false;
+    if (email != null ? !email.equals(that.email) : that.email != null) return false;
+    if (address2 != null ? !address2.equals(that.address2) : that.address2 != null) return false;
+    if (phone2 != null ? !phone2.equals(that.phone2) : that.phone2 != null) return false;
+    return group != null ? group.equals(that.group) : that.group == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = firstname != null ? firstname.hashCode() : 0;
+    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (homeTelephone != null ? homeTelephone.hashCode() : 0);
+    result = 31 * result + (mobileTelephone != null ? mobileTelephone.hashCode() : 0);
+    result = 31 * result + (email != null ? email.hashCode() : 0);
+    result = 31 * result + (address2 != null ? address2.hashCode() : 0);
+    result = 31 * result + (phone2 != null ? phone2.hashCode() : 0);
+    result = 31 * result + (group != null ? group.hashCode() : 0);
+    return result;
+  }
 }
