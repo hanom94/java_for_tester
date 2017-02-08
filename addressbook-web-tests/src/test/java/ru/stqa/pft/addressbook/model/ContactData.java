@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
+  private final String id;
   private final String firstname;
   private final String lastname;
   private final String nickname;
@@ -14,6 +15,7 @@ public class ContactData {
 
   public ContactData(String firstname, String lastname, String nickname, String address, String homeTelephone,
                      String mobileTelephone, String email, String address2, String phone2, String group) {
+    this.id = null;
     this.firstname = firstname;
     this.lastname = lastname;
     this.nickname = nickname;
@@ -24,6 +26,25 @@ public class ContactData {
     this.address2 = address2;
     this.phone2 = phone2;
     this.group = group;
+  }
+
+  public ContactData(String id, String firstname, String lastname, String nickname, String address, String homeTelephone,
+                     String mobileTelephone, String email, String address2, String phone2, String group) {
+    this.id = id;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.nickname = nickname;
+    this.address = address;
+    this.homeTelephone = homeTelephone;
+    this.mobileTelephone = mobileTelephone;
+    this.email = email;
+    this.address2 = address2;
+    this.phone2 = phone2;
+    this.group = group;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public String getFirstname() {
@@ -69,15 +90,9 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-            "firstname='" + firstname + '\'' +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", nickname='" + nickname + '\'' +
-            ", address='" + address + '\'' +
-            ", homeTelephone='" + homeTelephone + '\'' +
-            ", mobileTelephone='" + mobileTelephone + '\'' +
-            ", email='" + email + '\'' +
-            ", address2='" + address2 + '\'' +
-            ", phone2='" + phone2 + '\'' +
             ", group='" + group + '\'' +
             '}';
   }
@@ -89,30 +104,17 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != null ? !id.equals(that.id) : that.id != null) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-    if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
-    if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (homeTelephone != null ? !homeTelephone.equals(that.homeTelephone) : that.homeTelephone != null) return false;
-    if (mobileTelephone != null ? !mobileTelephone.equals(that.mobileTelephone) : that.mobileTelephone != null)
-      return false;
-    if (email != null ? !email.equals(that.email) : that.email != null) return false;
-    if (address2 != null ? !address2.equals(that.address2) : that.address2 != null) return false;
-    if (phone2 != null ? !phone2.equals(that.phone2) : that.phone2 != null) return false;
     return group != null ? group.equals(that.group) : that.group == null;
   }
 
   @Override
   public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (homeTelephone != null ? homeTelephone.hashCode() : 0);
-    result = 31 * result + (mobileTelephone != null ? mobileTelephone.hashCode() : 0);
-    result = 31 * result + (email != null ? email.hashCode() : 0);
-    result = 31 * result + (address2 != null ? address2.hashCode() : 0);
-    result = 31 * result + (phone2 != null ? phone2.hashCode() : 0);
     result = 31 * result + (group != null ? group.hashCode() : 0);
     return result;
   }

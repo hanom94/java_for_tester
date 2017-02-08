@@ -137,7 +137,8 @@ public class GroupContactHelperBase extends HelperBase {
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
       String name = element.getText();
-      GroupData group = new GroupData(name, null, null);
+      String id = element.findElement(By.tagName("input")).getAttribute("value");
+      GroupData group = new GroupData(id, name, null, null);
       groups.add(group);
     }
     return groups;
@@ -150,7 +151,8 @@ public class GroupContactHelperBase extends HelperBase {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String firstname = cells.get(1).getText();
       String lastname = cells.get(2).getText();
-      ContactData contact = new ContactData(firstname, lastname, null, null, null,
+      String id = element.findElement(By.tagName("input")).getAttribute("value");
+      ContactData contact = new ContactData(id, lastname, firstname, null, null, null,
               null,null, null, null, null);
       contacts.add(contact);
     }

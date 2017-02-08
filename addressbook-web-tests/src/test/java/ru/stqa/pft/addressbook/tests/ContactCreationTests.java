@@ -17,7 +17,7 @@ public class ContactCreationTests extends TestBase {
     }
     app.getNavigationHelper().gotoHomePage();
     List<ContactData> before = app.getGroupContactHelperBase().getContactList();
-    app.getGroupContactHelperBase().createContact(new ContactData("Виктор", "Викторович",
+    app.getGroupContactHelperBase().createContact(new ContactData("Виктор","Иванов",
             null, null, null,
             null, null,
             null, null, "test1"));
