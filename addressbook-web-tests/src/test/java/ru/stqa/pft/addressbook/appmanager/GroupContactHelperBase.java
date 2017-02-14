@@ -170,8 +170,7 @@ public class GroupContactHelperBase extends HelperBase {
     for (WebElement element : elements){
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(id, name, null, null);
-      groups.add(group);
+      groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;
   }
@@ -184,9 +183,7 @@ public class GroupContactHelperBase extends HelperBase {
       String firstname = cells.get(1).getText();
       String lastname = cells.get(2).getText();
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(id, lastname, firstname, null, null, null,
-              null,null, null, null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withLastname(firstname).withFirstname(lastname));
     }
     return contacts;
   }

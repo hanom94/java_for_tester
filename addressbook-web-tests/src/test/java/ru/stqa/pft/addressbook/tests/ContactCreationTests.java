@@ -13,14 +13,13 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation() {
     if (app.groupContact().groupList().size() == 0){
-      app.groupContact().createGroup(new GroupData("test1", null, null));
+      app.groupContact().createGroup(new GroupData().withName("test1").withHeader(null).withFooter(null));
     }
     app.goTo().homePage();
     List<ContactData> before = app.groupContact().contactList();
-    ContactData contact = new ContactData("Виктор", "Иванов",
-            null, null, null,
-            null, null,
-            null, null, "[none]");
+    ContactData contact = new ContactData().withFirstname("Виктор").withLastname("Иванов")
+            .withNickname(null).withAddress(null).withHomeTelephone(null).withMobileTelephone(null)
+            .withEmail(null).withAddress2(null).withPhone2(null).withGroup("[none]");
     app.groupContact().createContact(contact);
     List<ContactData> after = app.groupContact().contactList();
     Assert.assertEquals(after.size(), before.size() + 1);

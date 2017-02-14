@@ -18,14 +18,13 @@ public class ContactModificationTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.groupContact().groupList().size() == 0){
-      app.groupContact().createGroup(new GroupData("test1", null, null));
+      app.groupContact().createGroup(new GroupData().withName("test1").withHeader(null).withFooter(null));
     }
     app.goTo().homePage();
     if (app.groupContact().contactList().size() == 0){
-      app.groupContact().createContact(new ContactData("Виктор", "Иванов",
-              null, null, null,
-              null, null,
-              null, null, "[none]"));
+      app.groupContact().createContact(new ContactData().withFirstname("Виктор").withLastname("Иванов")
+              .withNickname(null).withAddress(null).withHomeTelephone(null).withMobileTelephone(null)
+              .withEmail(null).withAddress2(null).withPhone2(null).withGroup("[none]"));
     }
     app.goTo().homePage();
   }
@@ -34,10 +33,10 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification (){
     List<ContactData> before = app.groupContact().contactList();
     int index = before.size() -1;
-    ContactData contact = new ContactData(before.get(index).getId(),"Виктор", "Иванов",
-            "ViktorXX", "Киев", "+380988888888",
-            "+380999999999", "viktorxx@mail.ua",
-            "Киев, Улица 1 ", "+380933333333", null);
+    ContactData contact = new ContactData().withId(before.get(index).getId()).withFirstname("Виктор")
+            .withLastname("Иванов").withNickname("ViktorXX").withAddress("Киев").withHomeTelephone("+380988888888")
+            .withMobileTelephone("+380999999999").withEmail("viktorxx@mail.ua")
+            .withAddress2("Киев, Улица 1 ").withPhone2("+380933333333").withGroup(null);
     app.groupContact().modifyContact(index, contact);
     List<ContactData> after = app.groupContact().contactList();
     Assert.assertEquals(after.size(), before.size());

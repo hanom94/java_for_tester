@@ -1,54 +1,75 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String nickname;
-  private final String address;
-  private final String homeTelephone;
-  private final String mobileTelephone;
-  private final String email;
-  private final String address2;
-  private final String phone2;
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String lastname;
+  private String nickname;
+  private String address;
+  private String homeTelephone;
+  private String mobileTelephone;
+  private String email;
+  private String address2;
+  private String phone2;
   private String group;
-
-  public ContactData(String firstname, String lastname, String nickname, String address, String homeTelephone,
-                     String mobileTelephone, String email, String address2, String phone2, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.address = address;
-    this.homeTelephone = homeTelephone;
-    this.mobileTelephone = mobileTelephone;
-    this.email = email;
-    this.address2 = address2;
-    this.phone2 = phone2;
-    this.group = group;
-  }
-
-  public ContactData(int id, String firstname, String lastname, String nickname, String address, String homeTelephone,
-                     String mobileTelephone, String email, String address2, String phone2, String group) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.address = address;
-    this.homeTelephone = homeTelephone;
-    this.mobileTelephone = mobileTelephone;
-    this.email = email;
-    this.address2 = address2;
-    this.phone2 = phone2;
-    this.group = group;
-  }
 
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withHomeTelephone(String homeTelephone) {
+    this.homeTelephone = homeTelephone;
+    return this;
+  }
+
+  public ContactData withMobileTelephone(String mobileTelephone) {
+    this.mobileTelephone = mobileTelephone;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withAddress2(String address2) {
+    this.address2 = address2;
+    return this;
+  }
+
+  public ContactData withPhone2(String phone2) {
+    this.phone2 = phone2;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
   public String getFirstname() {
