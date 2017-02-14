@@ -111,6 +111,7 @@ public class GroupContactHelperBase extends HelperBase {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+    groupCache = null;
     returnToGroupPage();
   }
 
@@ -119,12 +120,14 @@ public class GroupContactHelperBase extends HelperBase {
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
+    groupCache = null;
     returnToGroupPage();
   }
 
   public void deleteGroup(GroupData deletedGroup) {
     selectGroupById(deletedGroup.getId());
     deleteSelectedGroups();
+    groupCache = null;
     returnToGroupPage();
   }
 
@@ -136,6 +139,7 @@ public class GroupContactHelperBase extends HelperBase {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
+    contactCache = null;
     returnToHomePage();
   }
 
@@ -143,12 +147,14 @@ public class GroupContactHelperBase extends HelperBase {
     initContactModification(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
+    contactCache = null;
     returnToHomePage();
   }
 
   public void deleteContact(ContactData deletedContact) {
     selectContactById(deletedContact.getId());
     deleteSelectedContacts();
+    contactCache = null;
     returnToHomePage();
   }
 
@@ -164,27 +170,38 @@ public class GroupContactHelperBase extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Groups groupCache = null;
+
   public Groups allGroup() {
-    Groups groups = new Groups();
+    if(groupCache !=null){
+      return new Groups(groupCache);
+    }
+
+    groupCache = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      groups.add(new GroupData().withId(id).withName(name));
+      groupCache.add(new GroupData().withId(id).withName(name));
     }
-    return groups;
+    return new Groups(groupCache);
   }
 
+  private Contacts contactCache = null;
+
   public Contacts allContact() {
-    Contacts contacts = new Contacts();
+      if(contactCache !=null){
+        return new Contacts(contactCache);
+      }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withLastname(lastname).withFirstname(firstname));
+      contactCache.add(new ContactData().withId(id).withLastname(lastname).withFirstname(firstname));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 }
