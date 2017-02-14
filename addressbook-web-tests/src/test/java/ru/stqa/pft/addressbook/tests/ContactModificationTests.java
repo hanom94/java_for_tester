@@ -1,14 +1,14 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by hanom on 26.01.2017.
@@ -32,19 +32,17 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification (){
-    Set<ContactData> before = app.groupContact().allContact();
+    Contacts before = app.groupContact().allContact();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withLastname("Иванов")
             .withFirstname("Виктор").withNickname("ViktorXX").withAddress("Киев").withHomeTelephone("+380988888888")
             .withMobileTelephone("+380999999999").withEmail("viktorxx@mail.ua")
             .withAddress2("Киев, Улица 1 ").withPhone2("+380933333333").withGroup(null);
     app.groupContact().modifyContact(contact);
-    Set<ContactData> after = app.groupContact().allContact();
-    Assert.assertEquals(after.size(), before.size());
+    Contacts after = app.groupContact().allContact();
+    assertEquals(after.size(), before.size());
 
-    before.remove(modifiedContact);
-    before.add(contact);
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 
 }

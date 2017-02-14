@@ -8,7 +8,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -162,8 +164,8 @@ public class GroupContactHelperBase extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public Set<GroupData> allGroup() {
-    Set<GroupData> groups = new HashSet<GroupData>();
+  public Groups allGroup() {
+    Groups groups = new Groups();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
       String name = element.getText();
@@ -173,8 +175,8 @@ public class GroupContactHelperBase extends HelperBase {
     return groups;
   }
 
-  public Set<ContactData> allContact() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  public Contacts allContact() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
       List<WebElement> cells = element.findElements(By.tagName("td"));
