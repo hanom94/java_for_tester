@@ -7,27 +7,26 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
-    if (app.groupContact().groupList().size() == 0){
+    if (app.groupContact().allGroup().size() == 0){
       app.groupContact().createGroup(new GroupData().withName("test1").withHeader(null).withFooter(null));
     }
     app.goTo().homePage();
-    List<ContactData> before = app.groupContact().contactList();
-    ContactData contact = new ContactData().withFirstname("Виктор").withLastname("Иванов")
+    Set<ContactData> before = app.groupContact().allContact();
+    ContactData contact = new ContactData().withLastname("Иванов").withFirstname("Виктор")
             .withNickname(null).withAddress(null).withHomeTelephone(null).withMobileTelephone(null)
             .withEmail(null).withAddress2(null).withPhone2(null).withGroup("[none]");
     app.groupContact().createContact(contact);
-    List<ContactData> after = app.groupContact().contactList();
+    Set<ContactData> after = app.groupContact().allContact();
     Assert.assertEquals(after.size(), before.size() + 1);
 
+    contact.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt());
     before.add(contact);
-    Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before,after);
   }
 

@@ -11,7 +11,9 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hanom on 26.01.2017.
@@ -48,8 +50,8 @@ public class GroupContactHelperBase extends HelperBase {
     clickGroup(By.name("delete"));
   }
 
-  public void selectGroup(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  public void selectGroupById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void submitContactCreation() {
@@ -86,20 +88,16 @@ public class GroupContactHelperBase extends HelperBase {
     clickGroup(By.name("update"));
   }
 
-  public void initContactModification(int index) {
-    WebElement wd1 = wd.findElement(By.id("maintable"));
-    WebElement wd2 = wd1.findElements(By.name("entry")).get(index);
-    WebElement wd3 = (WebElement) wd2.findElements(By.tagName("td")).get(7);
-    WebElement wd4 = (WebElement) wd3.findElement(By.tagName("a"));
-    wd4.click();
+  public void initContactModification(int id) {
+    wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img")).click();
   }
 
   public void submitContactModification() {
     clickContact(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void deleteSelectedContacts() {
@@ -114,16 +112,16 @@ public class GroupContactHelperBase extends HelperBase {
     returnToGroupPage();
   }
 
-  public void modifyGroup(int index, GroupData group) {
-    selectGroup(index);
+  public void modifyGroup(GroupData group) {
+    selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnToGroupPage();
   }
 
-  public void deleteGroup(int index) {
-    selectGroup(index);
+  public void deleteGroup(GroupData deletedGroup) {
+    selectGroupById(deletedGroup.getId());
     deleteSelectedGroups();
     returnToGroupPage();
   }
@@ -139,15 +137,15 @@ public class GroupContactHelperBase extends HelperBase {
     returnToHomePage();
   }
 
-  public void modifyContact(int index, ContactData contact) {
-    initContactModification(index);
+  public void modifyContact(ContactData contact) {
+    initContactModification(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
     returnToHomePage();
   }
 
-  public void deleteContact(int index) {
-    selectContact(index);
+  public void deleteContact(ContactData deletedContact) {
+    selectContactById(deletedContact.getId());
     deleteSelectedContacts();
     returnToHomePage();
   }
@@ -164,8 +162,8 @@ public class GroupContactHelperBase extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> groupList() {
-    List<GroupData> groups = new ArrayList<GroupData>();
+  public Set<GroupData> allGroup() {
+    Set<GroupData> groups = new HashSet<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
       String name = element.getText();
@@ -175,15 +173,15 @@ public class GroupContactHelperBase extends HelperBase {
     return groups;
   }
 
-  public List<ContactData> contactList() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+  public Set<ContactData> allContact() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
       List<WebElement> cells = element.findElements(By.tagName("td"));
-      String firstname = cells.get(1).getText();
-      String lastname = cells.get(2).getText();
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withLastname(firstname).withFirstname(lastname));
+      contacts.add(new ContactData().withId(id).withLastname(lastname).withFirstname(firstname));
     }
     return contacts;
   }

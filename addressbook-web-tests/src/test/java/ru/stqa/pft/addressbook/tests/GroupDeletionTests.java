@@ -6,26 +6,27 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTests extends TestBase{
 
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().groupPage();
-        if (app.groupContact().groupList().size() == 0){
+        if (app.groupContact().allGroup().size() == 0){
             app.groupContact().createGroup(new GroupData().withName("test1"));
         }
     }
 
     @Test
     public void testGroupDeletion() {
-        List<GroupData> before = app.groupContact().groupList();
-        int index = before.size() -1;
-        app.groupContact().deleteGroup(index);
-        List<GroupData> after = app.groupContact().groupList();
+        Set<GroupData> before = app.groupContact().allGroup();
+        GroupData deletedGroup = before.iterator().next();
+        app.groupContact().deleteGroup(deletedGroup);
+        Set<GroupData> after = app.groupContact().allGroup();
         Assert.assertEquals(after.size(), before.size() -1);
 
-        before.remove(index);
+        before.remove(deletedGroup);
         Assert.assertEquals(before, after);
     }
 }

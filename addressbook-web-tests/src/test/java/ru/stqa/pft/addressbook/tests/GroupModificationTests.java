@@ -7,6 +7,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hanom on 26.01.2017.
@@ -16,26 +17,23 @@ public class GroupModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions(){
     app.goTo().groupPage();
-    if (app.groupContact().groupList().size() == 0){
+    if (app.groupContact().allGroup().size() == 0){
       app.groupContact().createGroup(new GroupData().withName("test1"));
     }
   }
 
   @Test
   public void testModificationGroup() {
-    List<GroupData> before = app.groupContact().groupList();
-    int index = before.size()-1;
+    Set<GroupData> before = app.groupContact().allGroup();
+    GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .withId(before.get(index).getId()).withName("test1").withHeader("test2").withFooter("test3");
-    app.groupContact().modifyGroup(index, group);
-    List<GroupData> after = app.groupContact().groupList();
+            .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
+    app.groupContact().modifyGroup(group);
+    Set<GroupData> after = app.groupContact().allGroup();
     Assert.assertEquals(after.size(), before.size());
 
-    before.remove(index);
+    before.remove(modifiedGroup);
     before.add(group);
-    Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
   }
 }
