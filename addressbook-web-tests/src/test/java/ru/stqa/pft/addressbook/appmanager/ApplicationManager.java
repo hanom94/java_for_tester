@@ -45,11 +45,11 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public GroupContactHelperBase getGroupContactHelperBase() {
+  public GroupContactHelperBase groupContact() {
     return groupContactHelperBase;
   }
 
-  public NavigationHelper getNavigationHelper() {
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
 }

@@ -2,30 +2,27 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.appmanager.GroupContactHelperBase;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() {
-    if (! app.getGroupContactHelperBase().isThereAGroup()){
-      app.getGroupContactHelperBase().createGroup(new GroupData("test1", null, null));
+    if (app.groupContact().groupList().size() == 0){
+      app.groupContact().createGroup(new GroupData("test1", null, null));
     }
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactData> before = app.getGroupContactHelperBase().getContactList();
+    app.goTo().homePage();
+    List<ContactData> before = app.groupContact().contactList();
     ContactData contact = new ContactData("Виктор", "Иванов",
             null, null, null,
             null, null,
-            null, null, "test1");
-    app.getGroupContactHelperBase().createContact(contact);
-    app.getNavigationHelper().gotoHomePage();
-    List<ContactData> after = app.getGroupContactHelperBase().getContactList();
+            null, null, "[none]");
+    app.groupContact().createContact(contact);
+    List<ContactData> after = app.groupContact().contactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(contact);

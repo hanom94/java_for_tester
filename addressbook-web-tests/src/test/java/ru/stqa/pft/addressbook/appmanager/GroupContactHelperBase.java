@@ -26,6 +26,10 @@ public class GroupContactHelperBase extends HelperBase {
     clickGroup(By.linkText("group page"));
   }
 
+  public void returnToHomePage() {
+    clickGroup(By.linkText("home"));
+  }
+
   public void submitGroupCreation() {
     clickGroup(By.name("submit"));
   }
@@ -110,6 +114,20 @@ public class GroupContactHelperBase extends HelperBase {
     returnToGroupPage();
   }
 
+  public void modifyGroup(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
+  }
+
+  public void deleteGroup(int index) {
+    selectGroup(index);
+    deleteSelectedGroups();
+    returnToGroupPage();
+  }
+
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
@@ -118,6 +136,20 @@ public class GroupContactHelperBase extends HelperBase {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
+    returnToHomePage();
+  }
+
+  public void modifyContact(int index, ContactData contact) {
+    initContactModification(index);
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void deleteContact(int index) {
+    selectContact(index);
+    deleteSelectedContacts();
+    returnToHomePage();
   }
 
   public boolean isThereAContact() {
@@ -132,7 +164,7 @@ public class GroupContactHelperBase extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> groupList() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
@@ -144,7 +176,7 @@ public class GroupContactHelperBase extends HelperBase {
     return groups;
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> contactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements){
