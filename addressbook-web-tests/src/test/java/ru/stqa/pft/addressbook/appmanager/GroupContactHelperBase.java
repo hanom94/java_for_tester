@@ -162,11 +162,11 @@ public class GroupContactHelperBase extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public int getGroupCount() {
+  public int GroupCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public int getContactCount() {
+  public int ContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
 

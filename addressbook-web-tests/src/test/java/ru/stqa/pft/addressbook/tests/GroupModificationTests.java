@@ -30,8 +30,7 @@ public class GroupModificationTests extends TestBase {
             .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
     app.groupContact().modifyGroup(group);
     Groups after = app.groupContact().allGroup();
-    assertEquals(after.size(), before.size());
-
+    assertThat(app.groupContact().GroupCount(), equalTo(before.size()));
     assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
   }
 }
