@@ -205,8 +205,9 @@ public class GroupContactHelperBase extends HelperBase {
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       String allPhones = cells.get(5).getText();
+      String email = cells.get(4).getText();
       contactCache.add(new ContactData().withId(id).withFirstname(firstname)
-              .withLastname(lastname).withAllPhones(allPhones));
+              .withLastname(lastname).withEmail(email).withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
   }
@@ -218,8 +219,9 @@ public class GroupContactHelperBase extends HelperBase {
     String HomeTelephone = wd.findElement(By.name("home")).getAttribute("value");
     String MobileTelephone = wd.findElement(By.name("mobile")).getAttribute("value");
     String Phone2 = wd.findElement(By.name("work")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withHomeTelephone(HomeTelephone).withMobileTelephone(MobileTelephone).withPhone2(Phone2);
+            .withHomeTelephone(HomeTelephone).withMobileTelephone(MobileTelephone).withPhone2(Phone2).withEmail(email);
   }
 }

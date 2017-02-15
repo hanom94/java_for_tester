@@ -8,6 +8,20 @@ public class ContactData {
   private String address;
   private String homeTelephone;
   private String allPhones;
+  private String mobileTelephone;
+  private String email;
+  private String address2;
+  private String phone2;
+  private String group;
+
+  public String getEmail() {
+    return email;
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
 
   public String getAllPhones() {
     return allPhones;
@@ -38,12 +52,6 @@ public class ContactData {
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
   }
-
-  private String mobileTelephone;
-  private String email;
-  private String address2;
-  private String phone2;
-  private String group;
 
   public int getId() {
     return id;
@@ -84,11 +92,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withEmail(String email) {
-    this.email = email;
-    return this;
-  }
-
   public ContactData withAddress2(String address2) {
     this.address2 = address2;
     return this;
@@ -126,10 +129,6 @@ public class ContactData {
 
   public String getMobileTelephone() {
     return mobileTelephone;
-  }
-
-  public String getEmail() {
-    return email;
   }
 
   public String getAddress2() {
