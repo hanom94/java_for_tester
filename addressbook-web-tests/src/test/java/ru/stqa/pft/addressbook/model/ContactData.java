@@ -7,6 +7,17 @@ public class ContactData {
   private String nickname;
   private String address;
   private String homeTelephone;
+  private String allPhones;
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
 
   @Override
   public boolean equals(Object o) {
