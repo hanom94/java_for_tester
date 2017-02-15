@@ -12,10 +12,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by hanom on 15.02.2017.
  */
-public class ContactPhoneTests extends TestBase {
+public class ContactAddressTests extends TestBase {
 
   @Test
-  public void testContactPhones(){
+  public void testContactAddress(){
     app.goTo().homePage();
     if (app.groupContact().allContact().size() == 0){
       app.groupContact().createContact(new ContactData().withLastname("Иванов").withFirstname("Виктор")
@@ -24,21 +24,20 @@ public class ContactPhoneTests extends TestBase {
               .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup("[none]"));
     }
     app.goTo().homePage();
-    ContactData contact = app.groupContact().allContact().iterator().next();
-    ContactData contactInfoFromEditForm = app.groupContact().infoFromEditFrom(contact);
+    ContactData address = app.groupContact().allContact().iterator().next();
+    ContactData addressInfoFromEditForm = app.groupContact().infoFromEditFrom(address);
 
-    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(address.getAddress(), equalTo(mergeAddress(addressInfoFromEditForm)));
   }
 
-  private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getHomeTelephone(), contact.getMobileTelephone(), contact.getPhone2())
+  private String mergeAddress(ContactData address) {
+    return Arrays.asList(address.getAddress())
             .stream().filter((s)-> ! s.equals(""))
-            .map(ContactPhoneTests::cleaned)
+            .map(ContactAddressTests::cleaned)
             .collect(Collectors.joining("\n"));
   }
 
-
-  public static String cleaned(String phone){
-    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+  private static String cleaned(String address) {
+    return address.replaceAll("[$&^*]", "");
   }
 }

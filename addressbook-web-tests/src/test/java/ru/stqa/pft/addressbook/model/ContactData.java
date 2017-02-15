@@ -23,6 +23,15 @@ public class ContactData {
     return this;
   }
 
+  public String getAddress() {
+    return address;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
   public String getAllPhones() {
     return allPhones;
   }
@@ -77,11 +86,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withAddress(String address) {
-    this.address = address;
-    return this;
-  }
-
   public ContactData withHomeTelephone(String homeTelephone) {
     this.homeTelephone = homeTelephone;
     return this;
@@ -117,10 +121,6 @@ public class ContactData {
 
   public String getNickname() {
     return nickname;
-  }
-
-  public String getAddress() {
-    return address;
   }
 
   public String getHomeTelephone() {
