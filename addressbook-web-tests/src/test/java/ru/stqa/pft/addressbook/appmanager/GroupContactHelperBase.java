@@ -91,11 +91,17 @@ public class GroupContactHelperBase extends HelperBase {
   }
 
   public void initContactModification(int id) {
-    //wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr['" + id + "']/td[8]/a/img")).click();
     WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
+  }
+
+  public void initContactMoreView(int id) {
+    WebElement edit = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = edit.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(6).findElement(By.tagName("a")).click();
   }
 
   public void submitContactModification() {
@@ -226,5 +232,29 @@ public class GroupContactHelperBase extends HelperBase {
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
             .withHomeTelephone(HomeTelephone).withMobileTelephone(MobileTelephone).withPhone2(Phone2).withEmail(email)
             .withAddress(address);
+  }
+
+  public ContactData infoFIOFromEditForm(ContactData contact) {
+    initContactModification(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String fio = firstname.concat(" ").concat(lastname);
+    String home = "H: " + wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = "M: " + wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = "W: " + wd.findElement(By.name("work")).getAttribute("value").concat("\n");
+    String address = wd.findElement(By.cssSelector("textarea[name='address']")).getAttribute("value").concat("\n");
+    String email = wd.findElement(By.cssSelector("input[name='email']")).getAttribute("value");
+    wd.navigate().back();
+    initContactMoreView(contact.getId());
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFIO(fio).withAddress(address).
+            withMobileTelephone(mobile).withHomeTelephone(home).withPhone2(work).withEmail(email);
+  }
+
+  public ContactData infoFromDetailsForm(ContactData contact) {
+    initContactMoreView(contact.getId());
+    String allData = wd.findElement(By.xpath("//div[@id='content']")).getText();
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withAllData(allData);
   }
 }

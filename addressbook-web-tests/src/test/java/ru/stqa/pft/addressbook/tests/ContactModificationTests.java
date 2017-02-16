@@ -36,10 +36,10 @@ public class ContactModificationTests extends TestBase {
     Contacts before = app.groupContact().allContact();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withLastname("Иванов")
-            .withFirstname("Виктор").withNickname("ViktorXX").withAddress("Киев, улица 1, дом 1")
+            .withFirstname("Виктор").withNickname(null).withAddress("Киев, улица 1, дом 1")
             .withHomeTelephone("+380988888888")
             .withMobileTelephone("+380999999999").withPhone2("+380933333333").withEmail("viktorxx@mail.ua")
-            .withAddress2("Киев, Улица 1 ").withGroup(null);
+            .withAddress2(null).withGroup(null);
     app.groupContact().modifyContact(contact);
     assertThat(app.groupContact().ContactCount(), equalTo(before.size()));
     Contacts after = app.groupContact().allContact();

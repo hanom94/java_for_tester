@@ -13,6 +13,27 @@ public class ContactData {
   private String address2;
   private String phone2;
   private String group;
+  private String allData;
+  private String FIO;
+
+  public String getFIO() {
+    return FIO;
+  }
+
+  public ContactData withFIO(String FIO) {
+    this.FIO = FIO;
+    return this;
+  }
+
+  public String getAllData() {
+    return allData;
+  }
+
+  public ContactData withAllData(String allData) {
+    this.allData = allData;
+    return this;
+  }
+
 
   public String getEmail() {
     return email;
