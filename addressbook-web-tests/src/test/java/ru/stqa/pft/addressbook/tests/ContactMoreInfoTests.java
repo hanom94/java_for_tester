@@ -28,13 +28,18 @@ public class ContactMoreInfoTests extends TestBase{
     ContactData contactInfoFromEditForm = app.groupContact().infoFIOFromEditForm(contact);
     ContactData contactInfoFromDetailsForm = app.groupContact().infoFromDetailsForm(contact);
 
-    assertThat(contactInfoFromDetailsForm.getAllData(), equalTo(mergeData(contactInfoFromEditForm)));
+    assertThat(cleaned(contactInfoFromDetailsForm.getAllData()), equalTo(cleaned(mergeData(contactInfoFromEditForm))));
   }
 
   private String mergeData(ContactData contact) {
-    return Arrays.asList(contact.getFIO(), contact.getAddress(), contact.getHomeTelephone(),
+    return Arrays.asList(contact.getFirstname(), contact.getLastname(), contact.getAddress(), contact.getHomeTelephone(),
             contact.getMobileTelephone(), contact.getPhone2(), contact.getEmail())
             .stream().filter((s) -> !s.equals(""))
+            .map(ContactMoreInfoTests::cleaned)
             .collect(Collectors.joining("\n"));
   }
+
+  public static String cleaned(String data){
+    return data.replaceAll("\\n", "").replaceAll("[:HMW]", "").replaceAll(" ", "");
+    }
 }

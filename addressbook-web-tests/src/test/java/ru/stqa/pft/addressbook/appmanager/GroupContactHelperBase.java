@@ -238,16 +238,14 @@ public class GroupContactHelperBase extends HelperBase {
     initContactModification(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
-    String fio = firstname.concat(" ").concat(lastname);
-    String home = "H: " + wd.findElement(By.name("home")).getAttribute("value");
-    String mobile = "M: " + wd.findElement(By.name("mobile")).getAttribute("value");
-    String work = "W: " + wd.findElement(By.name("work")).getAttribute("value").concat("\n");
-    String address = wd.findElement(By.cssSelector("textarea[name='address']")).getAttribute("value").concat("\n");
-    String email = wd.findElement(By.cssSelector("input[name='email']")).getAttribute("value");
+    //String fio = firstname.concat(" ").concat(lastname);
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work =  wd.findElement(By.name("work")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
     wd.navigate().back();
-    initContactMoreView(contact.getId());
-    wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withFIO(fio).withAddress(address).
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withAddress(address).
             withMobileTelephone(mobile).withHomeTelephone(home).withPhone2(work).withEmail(email);
   }
 
