@@ -6,7 +6,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,23 +17,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validContacts(){
+  public Iterator<Object[]> validContacts() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[]{new ContactData().withLastname("Иванов").withFirstname("Виктор")
-            .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
-            .withMobileTelephone("+380999999999").withPhone2("+380933333333")
-            .withEmail("viktorxx@mail.ua").withAddress2(null)
-            .withGroup("[none]")});
-    list.add(new Object[]{new ContactData().withLastname("Иванов").withFirstname("Виктор")
-            .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
-            .withMobileTelephone("+380999999999").withPhone2("+380933333333")
-            .withEmail("viktorxx@mail.ua").withAddress2(null)
-            .withGroup("[none]")});
-    list.add(new Object[]{new ContactData().withLastname("Иванов").withFirstname("Виктор")
-            .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
-            .withMobileTelephone("+380999999999").withPhone2("+380933333333")
-            .withEmail("viktorxx@mail.ua").withAddress2(null)
-            .withGroup("[none]")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+    String line = reader.readLine();
+    while (line != null){
+      String[] split = line.split(";");
+      list.add(new Object[] {new ContactData().withLastname(split[0]).withFirstname(split[1]).withNickname(split[2])
+                    .withAddress(split[3]).withHomeTelephone(split[4]).withMobileTelephone(split[4])
+                    .withPhone2(split[5]).withEmail(split[6]).withAddress2(split[7]).withGroup(split[8])});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
 

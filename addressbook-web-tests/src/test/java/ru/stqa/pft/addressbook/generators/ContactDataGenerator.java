@@ -44,9 +44,9 @@ public class ContactDataGenerator {
     Writer writer = new FileWriter(file);
     System.out.println(new File(".").getAbsolutePath());
     for (ContactData contact : contacts){
-      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getLastname(), contact.getFirstname()
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getLastname(), contact.getFirstname()
             , contact.getNickname(), contact.getAddress(), contact.getHomeTelephone(), contact.getMobileTelephone()
-            , contact.getPhone2(), contact.getEmail(), contact.getPhoto(), contact.getGroup()));
+            , contact.getPhone2(), contact.getEmail(), contact.getGroup()));
     }
     writer.close();
   }
@@ -56,10 +56,10 @@ public class ContactDataGenerator {
     for (int i = 0; i < count; i++){
       File photo = new File("src/test/resources/stru.png");
       contacts.add(new ContactData().withLastname("Иванов").withFirstname("Виктор")
-              .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
+              .withNickname("ViktorXX").withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
               .withMobileTelephone("+380999999999").withPhone2("+380933333333")
               .withEmail("viktorxx@mail.ua").withAddress2(null)
-              .withPhoto(photo).withGroup("[none]"));
+              .withGroup("[none]"));
     }
     return contacts;
   }
