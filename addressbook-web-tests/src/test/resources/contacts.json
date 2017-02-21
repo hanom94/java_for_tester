@@ -1,0 +1,35 @@
+[
+  {
+    "firstname": "Виктор",
+    "lastname": "Иванов",
+    "nickname": "ViktorXX",
+    "address": "Киев, улица 1, дом 1",
+    "homeTelephone": "+380988888888",
+    "mobileTelephone": "+380999999999",
+    "email": "viktorxx@mail.ua",
+    "phone2": "+380933333333",
+    "group": "[none]"
+  },
+  {
+    "firstname": "Виктор",
+    "lastname": "Иванов",
+    "nickname": "ViktorXX",
+    "address": "Киев, улица 1, дом 1",
+    "homeTelephone": "+380988888888",
+    "mobileTelephone": "+380999999999",
+    "email": "viktorxx@mail.ua",
+    "phone2": "+380933333333",
+    "group": "[none]"
+  },
+  {
+    "firstname": "Виктор",
+    "lastname": "Иванов",
+    "nickname": "ViktorXX",
+    "address": "Киев, улица 1, дом 1",
+    "homeTelephone": "+380988888888",
+    "mobileTelephone": "+380999999999",
+    "email": "viktorxx@mail.ua",
+    "phone2": "+380933333333",
+    "group": "[none]"
+  }
+]
