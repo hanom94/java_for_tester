@@ -6,6 +6,8 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -23,9 +25,10 @@ public class ContactModificationTests extends TestBase {
     }*/
     app.goTo().homePage();
     if (app.groupContact().allContact().size() == 0){
+      File photo = new File("src/test/resources/stru.png");
       app.groupContact().createContact(new ContactData().withLastname("Иванов").withFirstname("Виктор")
               .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
-              .withMobileTelephone("+380999999999").withPhone2("+380933333333")
+              .withMobileTelephone("+380999999999").withPhone2("+380933333333").withPhoto(photo)
               .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup("[none]"));
     }
     app.goTo().homePage();
@@ -34,12 +37,13 @@ public class ContactModificationTests extends TestBase {
   @Test
   public void testContactModification (){
     Contacts before = app.groupContact().allContact();
+    File photo = new File("src/test/resources/stru.png");
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withLastname("Иванов")
             .withFirstname("Виктор").withNickname(null).withAddress("Киев, улица 1, дом 1")
             .withHomeTelephone("+380988888888")
-            .withMobileTelephone("+380999999999").withPhone2("+380933333333").withEmail("viktorxx@mail.ua")
-            .withAddress2(null).withGroup(null);
+            .withMobileTelephone("+380999999999").withPhone2("+380933333333").withPhoto(photo)
+            .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup(null);
     app.groupContact().modifyContact(contact);
     assertThat(app.groupContact().ContactCount(), equalTo(before.size()));
     Contacts after = app.groupContact().allContact();
