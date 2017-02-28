@@ -23,30 +23,31 @@ public class ContactModificationTests extends TestBase {
     if (app.groupContact().allGroup().size() == 0){
       app.groupContact().createGroup(new GroupData().withName("test1").withHeader(null).withFooter(null));
     }*/
-    app.goTo().homePage();
-    if (app.groupContact().allContact().size() == 0){
+    if (app.db().contacts().size() == 0) {
       File photo = new File("src/test/resources/stru.png");
       app.groupContact().createContact(new ContactData().withLastname("Иванов").withFirstname("Виктор")
               .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
               .withMobileTelephone("+380999999999").withPhone2("+380933333333").withPhoto(photo)
               .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup("[none]"));
+      app.goTo().homePage();
     }
-    app.goTo().homePage();
   }
 
   @Test
   public void testContactModification (){
-    Contacts before = app.groupContact().allContact();
+    app.goTo().homePage();
+    Contacts before = app.db().contacts();
     File photo = new File("src/test/resources/stru.png");
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withLastname("Иванов")
-            .withFirstname("Виктор").withNickname(null).withAddress("Киев, улица 1, дом 1")
+            .withFirstname("Виктор").withNickname("ViktorXX").withAddress("Киев, улица 1, дом 1")
             .withHomeTelephone("+380988888888")
             .withMobileTelephone("+380999999999").withPhone2("+380933333333").withPhoto(photo)
             .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup(null);
+    app.goTo().homePage();
     app.groupContact().modifyContact(contact);
     assertThat(app.groupContact().ContactCount(), equalTo(before.size()));
-    Contacts after = app.groupContact().allContact();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
   }
 
