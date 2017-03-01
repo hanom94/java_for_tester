@@ -60,10 +60,13 @@ public class ContactCreationTests extends TestBase {
       app.goTo().homePage();
       Contacts before = app.db().contacts();
       app.groupContact().createContact(contact);
+      app.goTo().homePage();
       assertThat(app.groupContact().ContactCount(), equalTo(before.size() + 1));
       Contacts after = app.db().contacts();
       assertThat(after, equalTo(
               before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
+      verifyContactListInUI();
   }
 
   @Test (enabled = false)
