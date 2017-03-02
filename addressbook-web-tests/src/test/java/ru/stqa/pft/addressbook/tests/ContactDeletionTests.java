@@ -26,7 +26,7 @@ public class ContactDeletionTests extends TestBase {
     if (app.db().contacts().size() == 0) {
       File photo = new File("src/test/resources/stru.png");
       app.groupContact().createContact(new ContactData().withLastname("Иванов").withFirstname("Виктор")
-              .withNickname("ViktorXX").withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
+              .withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
               .withMobileTelephone("+380999999999").withPhone2("+380933333333").withPhoto(photo)
               .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup("[none]"));
       app.goTo().homePage();

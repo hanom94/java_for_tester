@@ -37,7 +37,7 @@ public class ContactAddressTests extends TestBase {
             .collect(Collectors.joining("\n"));
   }
 
-  private static String cleaned(String address) {
+  public static String cleaned(String address) {
     return address.replaceAll("[$&^*]", "");
   }
 }

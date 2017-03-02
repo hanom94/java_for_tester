@@ -42,17 +42,17 @@ public class TestBase {
   }
 
   @BeforeMethod
-  public void logTestStart(Method m, Object[] p){
+  public void logTestStart(Method m, Object[] p) {
     logger.info("Start test " + m.getName() + " with parameters " + Arrays.asList(p));
   }
 
   @AfterMethod(alwaysRun = true)
-  public void logTestStop(Method m, Object[] p){
+  public void logTestStop(Method m, Object[] p) {
     logger.info("Stop test " + m.getName() + " with parameters " + Arrays.asList(p));
   }
 
   public void verifyGroupListInUI() {
-    if(Boolean.getBoolean("verifyUI")) {
+    if (Boolean.getBoolean("verifyUI")) {
       Groups dbGroups = app.db().groups();
       Groups uiGroups = app.groupContact().allGroup();
       assertThat(uiGroups, equalTo(dbGroups.stream()
@@ -61,12 +61,13 @@ public class TestBase {
   }
 
   public void verifyContactListInUI() {
-    if(Boolean.getBoolean("verifyUI")) {
+    if (Boolean.getBoolean("verifyUI")) {
       Contacts dbContacts = app.db().contacts();
       Contacts uiContacts = app.groupContact().allContact();
       assertThat(uiContacts, equalTo(dbContacts.stream()
               .map((c) -> new ContactData().withId(c.getId())
-                      .withLastname(c.getLastname()).withFirstname(c.getFirstname()))
+                      .withFirstname(c.getFirstname()).withLastname(c.getLastname())
+                      .withAddress(c.getAddress()).withEmail(c.getEmail()))
               .collect(Collectors.toSet())));
     }
   }

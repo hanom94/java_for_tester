@@ -224,13 +224,8 @@ public class ContactData {
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-    if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
     if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (homeTelephone != null ? !homeTelephone.equals(that.homeTelephone) : that.homeTelephone != null) return false;
-    if (mobileTelephone != null ? !mobileTelephone.equals(that.mobileTelephone) : that.mobileTelephone != null)
-      return false;
-    if (email != null ? !email.equals(that.email) : that.email != null) return false;
-    return phone2 != null ? phone2.equals(that.phone2) : that.phone2 == null;
+    return email != null ? email.equals(that.email) : that.email == null;
   }
 
   @Override
@@ -238,12 +233,8 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (homeTelephone != null ? homeTelephone.hashCode() : 0);
-    result = 31 * result + (mobileTelephone != null ? mobileTelephone.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
-    result = 31 * result + (phone2 != null ? phone2.hashCode() : 0);
     return result;
   }
 
@@ -253,6 +244,8 @@ public class ContactData {
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
+            ", email='" + email + '\'' +
             '}';
   }
 
