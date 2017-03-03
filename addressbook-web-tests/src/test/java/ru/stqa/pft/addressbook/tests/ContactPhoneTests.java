@@ -21,7 +21,7 @@ public class ContactPhoneTests extends TestBase {
       app.groupContact().createContact(new ContactData().withLastname("Иванов").withFirstname("Виктор")
               .withNickname(null).withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
               .withMobileTelephone("+380999999999").withPhone2("+380933333333")
-              .withEmail("viktorxx@mail.ua").withAddress2(null).withGroup("[none]"));
+              .withEmail("viktorxx@mail.ua").withAddress2(null));
     }
     app.goTo().homePage();
     ContactData contact = app.groupContact().allContact().iterator().next();

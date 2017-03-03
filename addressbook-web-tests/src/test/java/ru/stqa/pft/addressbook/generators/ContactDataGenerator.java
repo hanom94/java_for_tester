@@ -77,7 +77,7 @@ public class ContactDataGenerator {
       for (ContactData contact : contacts){
         writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getLastname(), contact.getFirstname()
                 , contact.getNickname(), contact.getAddress(), contact.getHomeTelephone(), contact.getMobileTelephone()
-                , contact.getPhone2(), contact.getEmail(), contact.getGroup()));
+                , contact.getPhone2(), contact.getEmail(), contact.getGroups()));
       }
     }
   }
@@ -89,8 +89,7 @@ public class ContactDataGenerator {
       contacts.add(new ContactData().withLastname("Иванов").withFirstname("Виктор")
               .withNickname("ViktorXX").withAddress("Киев, улица 1, дом 1").withHomeTelephone("+380988888888")
               .withMobileTelephone("+380999999999").withPhone2("+380933333333")
-              .withEmail("viktorxx@mail.ua").withAddress2(null)
-              .withGroup("[none]"));
+              .withEmail("viktorxx@mail.ua").withAddress2(null));
     }
     return contacts;
   }
