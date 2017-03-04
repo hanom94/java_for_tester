@@ -7,10 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
-import ru.stqa.pft.addressbook.model.Groups;
+import ru.stqa.pft.addressbook.model.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -81,6 +78,26 @@ public class GroupContactHelperBase extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
+
+  public void addToGroup(int contact, int group) {
+    selectGroupById(contact);
+    selectValueInDropDown(By.name("to_group"), String.valueOf(group));
+    clickContact(By.name("add"));
+  }
+
+  public void selectGroupPage(int group) {
+    selectValueInDropDown(By.name("group"), String.valueOf(group));
+  }
+
+  public void deleteFromGroup(ContactInGroupData contact) {
+    selectGroupPage(contact.getGroupId());
+    selectContactById(contact.getContactId());
+    //clickContact(By.xpath("//input[contains(@value,'Add to')]"));
+  }
+
+  public void findContact(int contact) {
+    wd.findElement(By.tagName("input")).getAttribute(String.valueOf(contact));
   }
 
   public void initContactCreation() {
