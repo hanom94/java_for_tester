@@ -93,7 +93,7 @@ public class GroupContactHelperBase extends HelperBase {
   public void deleteFromGroup(ContactInGroupData contact) {
     selectGroupPage(contact.getGroupId());
     selectContactById(contact.getContactId());
-    //clickContact(By.xpath("//input[contains(@value,'Add to')]"));
+    wd.findElement(By.name("remove")).click();
   }
 
   public void findContact(int contact) {
