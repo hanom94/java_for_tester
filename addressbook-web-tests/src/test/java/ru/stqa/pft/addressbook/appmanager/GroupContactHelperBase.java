@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static ru.stqa.pft.addressbook.tests.TestBase.app;
 /**
  * Created by hanom on 26.01.2017.
  */
@@ -94,6 +95,17 @@ public class GroupContactHelperBase extends HelperBase {
     selectGroupPage(contact.getGroupId());
     selectContactById(contact.getContactId());
     wd.findElement(By.name("remove")).click();
+  }
+
+  public void checkUIContactIsDelete (ContactInGroupData contactInGroupData) {
+    isElementNotPresent(By.cssSelector("input[value='"+String.valueOf(contactInGroupData.getContactId())+"']"));
+  }
+
+  public Boolean checkDBContactIsDelete(ContactInGroupData contactInGroupData) {
+    if (!app.db().groups().contains(contactInGroupData.getGroupId()|contactInGroupData.getContactId())){
+      return true;
+    }
+    return false;
   }
 
   public void findContact(int contact) {
