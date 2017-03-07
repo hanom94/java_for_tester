@@ -26,6 +26,9 @@ public class ApplicationManager {
   private String browser;
   private RegistrationHelper registrationHelper;
 
+  //Создаем поле, которое будет содержать ссылку на помощника
+  private FtpHelper ftp;
+
   public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
@@ -59,6 +62,15 @@ public class ApplicationManager {
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
+  }
+
+  //Метод возвращает объект типа FtpHelper
+  public FtpHelper ftp(){
+    if(ftp == null) {
+      //в качестве параметра передается ссылка на ApplicationManager
+      ftp = new FtpHelper(this);
+    }
+    return ftp;
   }
 
   public WebDriver getDriver() {
