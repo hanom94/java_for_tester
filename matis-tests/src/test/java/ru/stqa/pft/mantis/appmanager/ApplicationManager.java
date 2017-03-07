@@ -19,9 +19,12 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
   private final Properties properties;
-  WebDriver wd;
+
+  //Что-бы никто к методу getDriver() не обратился случайно, делаем его private
+  private WebDriver wd;
 
   private String browser;
+  private RegistrationHelper registrationHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -31,20 +34,13 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-    if(Objects.equals(browser, BrowserType.FIREFOX)){
-      wd = new FirefoxDriver();
-    } else if(Objects.equals(browser, BrowserType.CHROME)){
-      wd = new ChromeDriver();
-    } else if(Objects.equals(browser, BrowserType.IE)){
-      wd = new InternetExplorerDriver();
-    }
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
   }
 
+  //Делаем инициализацию драйвера останова с проверкой
   public void stop() {
-    wd.quit();
+    if (wd != null){
+      wd.quit();
+    }
   }
 
   //Инициализация помощника(конструирование) при каждом обращении (для того, что-бы открыть несколько сессий)
@@ -54,5 +50,29 @@ public class ApplicationManager {
 
   public String getProperty(String key) {
     return properties.getProperty(key);
+  }
+
+  //Возвращение обьекта типа RegistrationHelper
+  //Реализовываем ленивую проверку
+  public RegistrationHelper registration() {
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public WebDriver getDriver() {
+    if (wd == null) { //Если драйвер не проинициализирован
+      if(Objects.equals(browser, BrowserType.FIREFOX)){
+        wd = new FirefoxDriver();
+      } else if(Objects.equals(browser, BrowserType.CHROME)){
+        wd = new ChromeDriver();
+      } else if(Objects.equals(browser, BrowserType.IE)){
+        wd = new InternetExplorerDriver();
+      }
+      wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+      wd.get(properties.getProperty("web.baseUrl"));
+    }
+    return wd;
   }
 }
