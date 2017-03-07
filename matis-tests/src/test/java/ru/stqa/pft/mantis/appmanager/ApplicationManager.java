@@ -46,4 +46,13 @@ public class ApplicationManager {
   public void stop() {
     wd.quit();
   }
+
+  //Инициализация помощника(конструирование) при каждом обращении (для того, что-бы открыть несколько сессий)
+  public HttpSession newSession(){
+    return new HttpSession(this);
+  }
+
+  public String getProperty(String key) {
+    return properties.getProperty(key);
+  }
 }
