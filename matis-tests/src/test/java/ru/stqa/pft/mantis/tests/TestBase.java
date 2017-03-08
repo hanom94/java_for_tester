@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class TestBase {
 
-  public static final ApplicationManager
+  protected static final ApplicationManager
           app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
   @BeforeSuite
