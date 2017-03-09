@@ -1,6 +1,7 @@
 package ru.stqa.pft.mantis.tests;
 
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
@@ -34,7 +35,7 @@ public class RegistrationTests extends TestBase{
     String email = String.format("user1%s@localhost.localdomain", now);
 
     //Делаем переменную для имени пользователя
-    String user = String.format("user1", now);
+    String user = String.format("user%s", now);
 
     //Делаем переменную для пароля пользователя
     String password = "password";
@@ -72,7 +73,7 @@ public class RegistrationTests extends TestBase{
   }
 
   //Останаливаем почтовый сервер
-  @BeforeMethod(alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void stopMailServer(){
     app.mail().stop();
   }

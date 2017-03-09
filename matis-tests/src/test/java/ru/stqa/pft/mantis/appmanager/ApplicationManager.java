@@ -28,6 +28,7 @@ public class ApplicationManager {
   //Создаем поле, которое будет содержать ссылку на помощника
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private AdministratorHelper administratorHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -71,6 +72,14 @@ public class ApplicationManager {
       ftp = new FtpHelper(this);
     }
     return ftp;
+  }
+
+  //Возвращение обьекта типа AdministratorHelper
+  public AdministratorHelper admin(){
+    if (administratorHelper==null) {
+      administratorHelper = new AdministratorHelper(this);
+    }
+    return administratorHelper;
   }
 
   public WebDriver getDriver() {

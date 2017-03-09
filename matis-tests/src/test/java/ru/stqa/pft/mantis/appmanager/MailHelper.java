@@ -69,6 +69,7 @@ public class MailHelper {
 
   public void start(){
     wiser.start();
+    wiser.setPort(25);
   }
 
   public void stop(){
