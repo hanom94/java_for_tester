@@ -23,7 +23,7 @@ public class RegistrationTests extends TestBase{
 
 
   //Запускаем почтовый сервер
-  @BeforeMethod
+  //@BeforeMethod
   public void startMailServer(){
     app.mail().start();
   }
@@ -40,11 +40,17 @@ public class RegistrationTests extends TestBase{
     //Делаем переменную для пароля пользователя
     String password = "password";
 
+    //Перед регистрацией пользователя, создаем его на почтовом сервисе
+    app.james().createUser(user, password);
+
     //Начинаем регистрацию
     app.registration().start(user, email);
 
     //Ожидание почты и присваем это значение mailMessage
-    List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+    //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+
+    //Получение почты с внешнего почтового сервиса
+    List<MailMessage> mailMessages = app.james().waitForMail(user, password, 60000);
 
     //Делаем вспомогательный метод
     //Сравниваем полученную ссылку в локальную переменную
@@ -73,7 +79,7 @@ public class RegistrationTests extends TestBase{
   }
 
   //Останаливаем почтовый сервер
-  @AfterMethod(alwaysRun = true)
+  //@AfterMethod(alwaysRun = true)
   public void stopMailServer(){
     app.mail().stop();
   }
