@@ -26,6 +26,7 @@ public class SoapTests extends TestBase {
   }
 
   @Test
+  //Тест для получения статуса баг репорта
   public void testGetIssues() throws RemoteException, ServiceException, MalformedURLException {
     Set<Project> projects = app.soap().getProgects();
     Set<Issue> issues = app.soap().getIssues(projects.iterator().next());

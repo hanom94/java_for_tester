@@ -40,7 +40,8 @@ public class SoapHelper {
             , BigInteger.valueOf(1), BigInteger.valueOf(10));
     //преобразование полученных данных в объекты project
     return Arrays.asList(issues).stream()
-            .map((i) -> new Issue().withId(i.getId().intValue()).withSummary(i.getSummary()).withDescription(i.getDescription()))
+            .map((i) -> new Issue().withId(i.getId().intValue()).withSummary(i.getSummary())
+                    .withStatus(i.getStatus().getName()).withDescription(i.getDescription()))
             .collect(Collectors.toSet());
   }
 
