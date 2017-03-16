@@ -11,8 +11,11 @@ public class IssuesTests extends TestBase {
 
   @Test
   public void testPreconditions() throws IOException {
+    //Тесты игнорируют актуальные баг-репорты (те, кторые не закрыты)
     skipIfNotFixed(1);
     skipIfNotFixed(2);
     skipIfNotFixed(3);
+    //Тест для закрытых баг-репортов
+    getIssueById(10);
   }
 }
