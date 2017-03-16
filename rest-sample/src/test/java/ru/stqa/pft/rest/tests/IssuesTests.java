@@ -15,6 +15,7 @@ public class IssuesTests extends TestBase {
     skipIfNotFixed(1);
     skipIfNotFixed(2);
     skipIfNotFixed(3);
+
     //Тест для закрытых баг-репортов
     getIssueById(10);
   }
